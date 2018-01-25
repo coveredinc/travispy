@@ -93,6 +93,7 @@
     "description": "TravisPy test project for Python 2.7",
     "active": true
   },
+  "pubkey": "-----BEGIN RSA PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCPS6OnH8PS5zQUGGS2C7nlWJt0\n6LkQyxyRXViSdpf7f0GNn77INBhH6ngKF7AtrqfVzUL3XfaT7rPRiqqdf5pOrDmT\narLvSreTkGV5XCzQgHGgQwZMd3MEArLx8/Ixt6ECoXnZjlKARYDFq5YiXTdD1PJ2\nkGJOB2YRoVcbrCD/TwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
   "user": {
     "login": "travispy",
     "name": "TravisPy"

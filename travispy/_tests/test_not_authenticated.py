@@ -242,3 +242,10 @@ def test_empty_archived_log(travis):
     assert log._body is None
     assert log.body == ''
     assert log._body == ''
+
+
+def test_repo_pubkey(travis, test_settings, repo_slug):
+    expected = test_settings.get('pubkey')
+    repo = travis.repo(repo_slug)
+    pubkey = repo.pubkey()
+    assert pubkey == expected

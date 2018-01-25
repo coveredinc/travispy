@@ -103,3 +103,13 @@ class Repo(Stateful):
             ``False`` if API call was unsuccessful
         '''
         return self._set_hook(True)
+
+    def pubkey(self):
+        '''
+        Fetch the public key for the repository
+
+        :rtype: unicode
+        :returns: The public key
+        '''
+        url = '/'.join([self._session.uri, self.many(), self.slug, 'key'])
+        return self._session.get(url).json().get('key')
