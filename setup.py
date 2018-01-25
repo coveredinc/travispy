@@ -29,7 +29,10 @@ setup(
     name='TravisPy',
     version='0.3.5',
     packages=['travispy', 'travispy.entities'],
-    install_requires=['requests'],
+    install_requires=[
+        'pycrypto>=2.0.0,<3.0.0',
+        'requests',
+    ],
 
     # metadata for upload to PyPI
     author='Fabio Menegazzo',

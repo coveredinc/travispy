@@ -1,3 +1,8 @@
+import base64
+
+import Crypto.PublicKey.RSA
+import Crypto.Cipher.PKCS1_v1_5
+
 from ._stateful import Stateful
 
 
@@ -113,3 +118,15 @@ class Repo(Stateful):
         '''
         url = '/'.join([self._session.uri, self.many(), self.slug, 'key'])
         return self._session.get(url).json().get('key')
+
+    def encrypt(self, value):
+        '''
+        Encrypt a string using the public key for the repository
+
+        :param str value: The string to be encrypted
+        :returns: The encrypted result
+        '''
+        pubkey = Crypto.PublicKey.RSA.importKey(self.pubkey())
+        encrypted = Crypto.Cipher.PKCS1_v1_5.new(pubkey).encrypt(value)
+        encoded = base64.b64encode(encrypted)
+        return encoded
