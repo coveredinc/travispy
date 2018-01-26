@@ -1,4 +1,5 @@
 import base64
+from collections import namedtuple
 
 import Crypto.PublicKey.RSA
 import Crypto.Cipher.PKCS1_v1_5
@@ -113,11 +114,12 @@ class Repo(Stateful):
         '''
         Fetch the public key for the repository
 
-        :rtype: unicode
+        :rtype: :class:`.Pubkey`
         :returns: The public key
         '''
         url = '/'.join([self._session.uri, self.many(), self.slug, 'key'])
-        return self._session.get(url).json().get('key')
+        result = self._session.get(url).json()
+        return Pubkey(**result)
 
     def encrypt(self, value):
         '''
@@ -126,7 +128,23 @@ class Repo(Stateful):
         :param str value: The string to be encrypted
         :returns: The encrypted result
         '''
-        pubkey = Crypto.PublicKey.RSA.importKey(self.pubkey())
+        pubkey = Crypto.PublicKey.RSA.importKey(self.pubkey().key)
         encrypted = Crypto.Cipher.PKCS1_v1_5.new(pubkey).encrypt(value)
         encoded = base64.b64encode(encrypted)
         return encoded
+
+
+class Pubkey(object):
+    """
+    A public key, with fingerprint.
+    """
+
+    def __init__(self, key, fingerprint=None):
+        """
+        :param str key:
+            The public key
+        :param str fingerprint:
+            The public key's fingerprint
+        """
+        self.key = key
+        self.fingerprint = fingerprint
