@@ -1,5 +1,4 @@
 import base64
-from collections import namedtuple
 
 import Crypto.PublicKey.RSA
 import Crypto.Cipher.PKCS1_v1_5
